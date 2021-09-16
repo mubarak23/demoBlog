@@ -34,3 +34,26 @@ exports.newCommentOnPost = async (req, res, next) => {
     }
   });
 };
+
+// singlePostComment
+//fetch below standard performance by id
+exports.getPostSingleComment = async (req, res) => {
+  try {
+    const { id, post_id } = req.body;
+
+    const singlePostComment = await CommentService.singlePostComment(
+      id,
+      post_id
+    );
+    return res.status(200).send({
+      success: true,
+      singlePostComment,
+    });
+  } catch (e) {
+    return res.status(400).send({
+      success: false,
+      err: e.message,
+      message: "Could not retrieve comment on a Post",
+    });
+  }
+};
