@@ -12,4 +12,7 @@ router.route("/posts/all").get(PostController.getAllPosts);
 // getPostById
 router.route("/post/:id").get(PostController.getPostById);
 
+// updatePost
+router.route("/post/update").patch(PostController.updatePost);
+
 module.exports = router;

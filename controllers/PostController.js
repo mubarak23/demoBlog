@@ -91,6 +91,37 @@ exports.getPostById = async (req, res) => {
   }
 };
 
+// updatePost
+exports.updatePost = async (req, res, next) =>
+  sequelize.transaction(async (t) => {
+    try {
+      const data = req.body;
+      const checkPost = await PostService.singlePost(data.id);
+
+      if (!checkPost) {
+        return res.status(404).send({
+          success: false,
+          message: "Post does not exist",
+        });
+      }
+      // Update single Post
+      const updateSinglePost = await PostService.updatePost(data, t);
+      if (!updateSinglePost) {
+        return res.status(400).send({
+          success: false,
+          message: "Failed to update Post",
+        });
+      }
+      return res.status(200).send({
+        success: true,
+        message: "Post updated successfully",
+      });
+    } catch (error) {
+      t.rollback();
+      return next(error);
+    }
+  });
+
 exports.uploadImage = async (postImage) => {
   return sequelize.transaction(async (t) => {
     //process image image upload here

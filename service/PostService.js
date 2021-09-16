@@ -50,3 +50,14 @@ exports.singlePost = (id) => {
   });
   return singlePost;
 };
+
+exports.updatePost = (data, transaction) => {
+  const updatesinglePost = PostModel.update(
+    data,
+    {
+      where: { id: data.id },
+    },
+    transaction
+  );
+  return updatesinglePost;
+};
