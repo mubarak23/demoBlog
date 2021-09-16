@@ -19,3 +19,17 @@ exports.singlePostComment = (id, post_id) => {
   });
   return singleComment;
 };
+
+exports.allPostComment = (id) => {
+  const singlePost = PostModel.findOne({
+    where: { id },
+    include: [
+      {
+        model: CommentModel,
+        as: "comments",
+        attributes: ["id", "body", "post_id", "commentBy"],
+      },
+    ],
+  });
+  return singlePost;
+};

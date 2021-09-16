@@ -57,3 +57,21 @@ exports.getPostSingleComment = async (req, res) => {
     });
   }
 };
+
+// allPostComment
+exports.getAllPostComments = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const singlePost = await CommentService.allPostComment(id);
+    return res.status(200).send({
+      success: true,
+      singlePost,
+    });
+  } catch (e) {
+    return res.status(400).send({
+      success: false,
+      err: e.message,
+      message: "Could not retrieve all Post Comment",
+    });
+  }
+};
