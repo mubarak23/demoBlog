@@ -1,19 +1,35 @@
 "use strict";
-module.exports = (sequelize, DataTypes) => {
-  const Comment = sequelize.define(
-    "Comment",
-    {
-      body: DataTypes.TEXT,
-      post_id: DataTypes.STRING,
-      commentBy: DataTypes.STRING,
+const Sequelize = require("sequelize");
+const sequelize = require("../config/database/connection");
+const Post = require("./post");
+
+const Comment = sequelize.define(
+  "comments",
+  {
+    id: {
+      type: Sequelize.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
     },
-    {}
-  );
+    body: {
+      type: Sequelize.TEXT,
+      allowNull: false,
+    },
+    post_id: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+    },
+    commentBy: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+  },
+  { paranoid: true }
+);
 
-  Comment.belongsTo(Post, {
-    foreignKey: "post_id",
-    as: "post_comments",
-  });
+Comment.belongsTo(Post, {
+  foreignKey: "post_id",
+  as: "post_comments",
+});
 
-  return Comment;
-};
+module.exports = Comment;

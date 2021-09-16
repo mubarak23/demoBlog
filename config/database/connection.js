@@ -1,17 +1,22 @@
-const dotenv = require("dotenv").config();
-const sequelize = require("sequelize");
+const dotenv = require("dotenv").config({
+  path: require("find-config")(".env"),
+});
+const Sequelize = require("sequelize");
 const config = require("./enviroment")[process.env.NODE_ENV];
-
-const sequelize = new Sequelize(
-  config.database,
-  config.username,
-  config.password,
-  {
-    host: config.host,
-    dialect: "postgres",
-    raw: true,
-  }
-);
+console.log(config);
+const sequelize = new Sequelize("demodb", "mubarak23", "3b3b3b3b", {
+  host: "localhost",
+  dialect: "postgres",
+  raw: true,
+  port: "5432",
+  seederStorage: process.env.SEEDER_STORAGE,
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000,
+  },
+});
 
 sequelize
   .authenticate()

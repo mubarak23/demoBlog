@@ -1,11 +1,11 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "database_development",
+    "username": "mubarak23",
+    "password": "3b3b3b3b",
+    "database": "demodb",
     "host": "127.0.0.1",
-    "dialect": "mysql",
-    "operatorsAliases": false
+    "dialect": "postgres",
+    "operatorsAliases": 0
   },
   "test": {
     "username": "root",

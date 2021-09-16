@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "description": "Test Assessment",
   "main": "server.js",
-  
   "dependencies": {
-    "body-parser": "latest",
+    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^6.2.0",
     "express": "^4.17.1",
@@ -14,13 +13,16 @@
     "express-unless": "^0.5.0",
     "express-useragent": "^1.0.13",
     "express-validator": "^6.2.0",
+    "find-config": "^1.0.0",
     "form-data": "^3.0.0",
     "helmet": "^3.21.2",
     "if-env": "^1.0.4",
     "moment": "^2.24.0",
     "morgan": "^1.9.1",
     "multer": "^1.4.2",
+    "mysql2": "^2.3.0",
     "nanoid": "^3.1.20",
+    "nodemon": "^2.0.4",
     "pg": "^7.14.0",
     "pg-hstore": "^2.3.3",
     "pm2": "^4.5.5",
@@ -29,7 +31,7 @@
     "uuid": "^7.0.2"
   },
   "scripts": {
-    "start": "nodemon start ./server.js"
+    "start": " nodemon server.js"
   },
   "author": "Mubarak Aminu",
   "license": "ISC"

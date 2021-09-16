@@ -1,17 +1,32 @@
 "use strict";
-module.exports = (sequelize, DataTypes) => {
-  const Post = sequelize.define(
-    "Post",
-    {
-      title: DataTypes.STRING,
-      body: DataTypes.TEXT,
-      imageUrl: DataTypes.STRING,
-      createdBy: DataTypes.STRING,
+const Sequelize = require("sequelize");
+const sequelize = require("../config/database/connection");
+
+const Post = sequelize.define(
+  "posts",
+  {
+    id: {
+      type: Sequelize.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
     },
-    {}
-  );
-  Post.associate = function (models) {
-    // associations can be defined here
-  };
-  return Post;
-};
+    title: {
+      type: Sequelize.STRING,
+    },
+    body: {
+      type: Sequelize.TEXT,
+      allowNull: false,
+    },
+    imageUrl: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    createdBy: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+  },
+  { paranoid: true }
+);
+
+module.exports = Post;
