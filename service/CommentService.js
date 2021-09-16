@@ -33,3 +33,21 @@ exports.allPostComment = (id) => {
   });
   return singlePost;
 };
+
+// exports.commentExist = (id) => {
+//   const singleComment = CommentModel.findOne({
+//     where: { id },
+//   });
+//   return singleComment;
+// };
+
+exports.updateComment = (data, transaction) => {
+  const updatesingleComment = CommentModel.update(
+    data,
+    {
+      where: { id: data.id },
+    },
+    transaction
+  );
+  return updatesingleComment;
+};

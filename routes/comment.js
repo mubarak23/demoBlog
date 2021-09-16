@@ -11,4 +11,7 @@ router.route("/comment/single").post(CommentController.getPostSingleComment);
 // getAllPostComments
 router.route("/comment/all/:id").get(CommentController.getAllPostComments);
 
+// updateComment
+router.route("/comment/update").patch(CommentController.commentUpdate);
+
 module.exports = router;

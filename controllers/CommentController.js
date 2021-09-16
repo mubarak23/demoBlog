@@ -75,3 +75,38 @@ exports.getAllPostComments = async (req, res) => {
     });
   }
 };
+
+// updateComment
+exports.commentUpdate = async (req, res, next) =>
+  sequelize.transaction(async (t) => {
+    try {
+      const data = req.body;
+
+      const checkComment = await CommentService.singlePostComment(
+        data.id,
+        data.post_id
+      );
+
+      if (!checkComment) {
+        return res.status(404).send({
+          success: false,
+          message: "Comment does not exist",
+        });
+      }
+      // Update single Comment
+      const updateSinglePost = await CommentService.updateComment(data, t);
+      if (!updateSinglePost) {
+        return res.status(400).send({
+          success: false,
+          message: "Failed to update COmment",
+        });
+      }
+      return res.status(200).send({
+        success: true,
+        message: "COmment updated successfully",
+      });
+    } catch (error) {
+      t.rollback();
+      return next(error);
+    }
+  });
