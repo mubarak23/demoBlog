@@ -28,6 +28,52 @@ exports.addNewPost = async (req, res, next) => {
   });
 };
 
+//fetch below standard performance by id
+exports.getAllPostPaginate = async (req, res) => {
+  try {
+    const AllPostwithPagination = await PostService.allPostwithPagination();
+    if (AllPostwithPagination === null) {
+      return res.status(400).send({
+        success: false,
+        message: "No Post, Start creating Post",
+      });
+    }
+    return res.status(200).send({
+      success: true,
+      AllPostwithPagination,
+    });
+  } catch (e) {
+    return res.status(400).send({
+      success: false,
+      err: e.message,
+      message: "Could not retrieve Post with Pagination",
+    });
+  }
+};
+
+// allPosts
+exports.getAllPosts = async (req, res) => {
+  try {
+    const AllPosts = await PostService.allPosts();
+    if (AllPosts === null) {
+      return res.status(400).send({
+        success: false,
+        message: "No Post, Start creating Post",
+      });
+    }
+    return res.status(200).send({
+      success: true,
+      AllPosts,
+    });
+  } catch (e) {
+    return res.status(400).send({
+      success: false,
+      err: e.message,
+      message: "Could not retrieve Post with Pagination",
+    });
+  }
+};
+
 exports.uploadImage = async (postImage) => {
   return sequelize.transaction(async (t) => {
     //process image image upload here

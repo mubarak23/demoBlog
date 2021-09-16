@@ -1,7 +1,7 @@
 "use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("Comments", {
+    return queryInterface.createTable("comments", {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
