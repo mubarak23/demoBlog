@@ -16,7 +16,7 @@ exports.createPost = ({ title, body, imageUrl, createdBy, transaction }) => {
 
 exports.allPostwithPagination = () => {
   const Posts = PostModel.findAll({
-    limit: 1,
+    limit: 4,
     offset: 1,
     attributes: ["id", "title", "body", "imageUrl", "createdBy"],
     include: [
@@ -60,4 +60,14 @@ exports.updatePost = (data, transaction) => {
     transaction
   );
   return updatesinglePost;
+};
+
+exports.deletePost = ({ id, transaction }) => {
+  const deleteSInglePost = PostModel.destroy(
+    {
+      where: { id },
+    },
+    transaction
+  );
+  return deleteSInglePost;
 };

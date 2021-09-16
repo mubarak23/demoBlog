@@ -122,6 +122,34 @@ exports.updatePost = async (req, res, next) =>
     }
   });
 
+//delete deletePost
+exports.deletePost = async (req, res) => {
+  sequelize.transaction(async (t) => {
+    try {
+      const { id } = req.params;
+      const checkPost = await PostService.singlePost(id);
+
+      if (!checkPost) {
+        return res.status(404).send({
+          success: false,
+          message: "Post does not exist",
+        });
+      }
+      // eslint-disable-next-line no-unused-vars
+      const deleteSinglePost = await PostService.deletePost({
+        id,
+        transaction: t,
+      });
+      return res.status(200).send({
+        success: true,
+        message: "Post was deleted successfully",
+      });
+    } catch (error) {
+      return res.status(400).send({ success: false, message: error.message });
+    }
+  });
+};
+
 exports.uploadImage = async (postImage) => {
   return sequelize.transaction(async (t) => {
     //process image image upload here
