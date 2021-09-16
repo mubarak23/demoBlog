@@ -51,3 +51,13 @@ exports.updateComment = (data, transaction) => {
   );
   return updatesingleComment;
 };
+
+exports.deleteComment = ({ id, transaction }) => {
+  const deleteSinglePost = CommentModel.destroy(
+    {
+      where: { id },
+    },
+    transaction
+  );
+  return deleteSinglePost;
+};

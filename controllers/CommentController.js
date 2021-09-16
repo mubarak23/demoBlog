@@ -110,3 +110,31 @@ exports.commentUpdate = async (req, res, next) =>
       return next(error);
     }
   });
+
+// deleteComment
+exports.deleteComment = async (req, res) => {
+  sequelize.transaction(async (t) => {
+    try {
+      const { id, post_id } = req.params;
+      const checkComment = await CommentService.singlePostComment(id, post_id);
+
+      if (!checkComment) {
+        return res.status(404).send({
+          success: false,
+          message: "Comment on Post does not exist",
+        });
+      }
+      // eslint-disable-next-line no-unused-vars
+      const deleteComment = await CommentService.deleteComment({
+        id,
+        transaction: t,
+      });
+      return res.status(200).send({
+        success: true,
+        message: "Post Comment deleted successfully",
+      });
+    } catch (error) {
+      return res.status(400).send({ success: false, message: error.message });
+    }
+  });
+};
