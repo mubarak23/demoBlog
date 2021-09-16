@@ -43,3 +43,10 @@ exports.allPosts = () => {
   });
   return Posts;
 };
+
+exports.singlePost = (id) => {
+  const singlePost = PostModel.findOne({
+    where: { id },
+  });
+  return singlePost;
+};

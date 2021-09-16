@@ -74,6 +74,23 @@ exports.getAllPosts = async (req, res) => {
   }
 };
 
+exports.getPostById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const singlePost = await PostService.singlePost(id);
+    return res.status(200).send({
+      success: true,
+      singlePost,
+    });
+  } catch (e) {
+    return res.status(400).send({
+      success: false,
+      err: e.message,
+      message: "Could not retrieve  Post",
+    });
+  }
+};
+
 exports.uploadImage = async (postImage) => {
   return sequelize.transaction(async (t) => {
     //process image image upload here
