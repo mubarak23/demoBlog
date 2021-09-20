@@ -4,8 +4,8 @@ const dotenv = require("dotenv").config({
 const Sequelize = require("sequelize");
 const config = require("./enviroment")[process.env.NODE_ENV];
 console.log(config);
-const sequelize = new Sequelize("demodb", "mubarak23", "3b3b3b3b", {
-  host: "localhost",
+const sequelize = new Sequelize(database, username, password, {
+  host: host,
   dialect: "postgres",
   raw: true,
   port: "5432",
