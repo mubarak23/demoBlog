@@ -31,8 +31,11 @@
     "uuid": "^7.0.2"
   },
   "scripts": {
-    "start": " nodemon server.js"
+    "start": " node server.js"
   },
   "author": "Mubarak Aminu",
-  "license": "ISC"
+  "license": "ISC",
+  "engines": {
+    "node": "10.x"
+  }
 }
